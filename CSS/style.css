@@ -83,7 +83,7 @@ body {
     cursor: pointer;
 }
 
-.choice:hover {
+.choice_hover:hover {
     color: var(--primary-color);
 }
 

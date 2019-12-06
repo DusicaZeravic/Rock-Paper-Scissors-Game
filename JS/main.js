@@ -81,14 +81,16 @@ function showWinner(winner, computerChoice) {
         <i class="fas fa-hand-${computerChoice} fa-10x"></i>
         <p>Computer Choose<strong> ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)}</strong></p>
         `;
-    } if(scoreboard.player == 3 || scoreboard.computer == 3) {
-        let game_over = document.querySelector('#h2').innerHTML = "Game Over!";
-        let h2 = document.querySelector('#h2').style.color = "red";
-        choices.forEach(choice => choice.removeEventListener(('click'), play)); 
-        restart.style.display = 'inline-block';
-    } else if(scoreboard.player == 0 && scoreboard.computer == 0) {
-        choices.forEach(choice => choice.addEventListener(('click'), play));
     }
+    
+    if(scoreboard.player == 3 || scoreboard.computer == 3) {
+        document.querySelector('#h2').innerHTML = "Game Over!";
+        document.querySelector('#h2').style.color = "red";
+        choices.forEach(choice => choice.removeEventListener(('click'), play)); 
+        $('.choice').removeClass('choice_hover');
+        $('.choice').css('cursor','default');
+        restart.style.display = 'inline-block';
+    } 
     
     // Show Score
     score.innerHTML = `
@@ -100,10 +102,13 @@ function showWinner(winner, computerChoice) {
 
 // Restart Game
 function restartGame() {
-    let play_again = document.querySelector('#h2').innerHTML = "Make your selection";
-    let play = document.querySelector('#h2').style.color = "#333";
+    document.querySelector('#h2').innerHTML = "Make your selection";
+    document.querySelector('#h2').style.color = "#333";
     scoreboard.player = 0;
     scoreboard.computer = 0;
+    choices.forEach(choice => choice.addEventListener(('click'), play));
+    $('.choice').addClass('choice_hover');
+    $('.choice').css('cursor','pointer');
     score.innerHTML = `
     <p>Player: 0</p>
     <p>Computer: 0</p>
